@@ -8,9 +8,10 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Hologram {
-    private final Location location;
-    private final String text;
+    private Location location;
+    private String text;
     private final boolean gravity;
+    private ArmorStand entity;
 
     private Hologram(Builder builder) {
         this.location = builder.location;
@@ -21,11 +22,36 @@ public class Hologram {
     public void create() {
         World world = this.location.getWorld();
         if (world == null) { return; }
-        ArmorStand armorStand = (ArmorStand) world.spawnEntity(this.location, EntityType.ARMOR_STAND);
-        armorStand.setCustomName(this.text);
-        armorStand.setCustomNameVisible(true);
-        armorStand.setInvisible(true);
-        armorStand.setGravity(this.gravity);
+        this.entity = (ArmorStand) world.spawnEntity(this.location, EntityType.ARMOR_STAND);
+        this.entity.setCustomName(this.text);
+        this.entity.setCustomNameVisible(true);
+        this.entity.setInvisible(true);
+        this.entity.setGravity(this.gravity);
+    }
+
+    public void destroy() {
+        if (this.entity != null && !this.entity.isDead()) {
+            this.entity.remove();
+            this.entity = null;
+        }
+    }
+
+    public void setText(String text) {
+        if (this.entity != null && !this.entity.isDead()) {
+            this.entity.setCustomName(text);
+            this.text = text;
+        }
+    }
+
+    public void setLocation(Location location) {
+        if (this.entity != null && !this.entity.isDead()) {
+            this.entity.teleport(location);
+            this.location = location;
+        }
+    }
+
+    public ArmorStand getInstance() {
+        return this.entity;
     }
 
     public static class Builder {

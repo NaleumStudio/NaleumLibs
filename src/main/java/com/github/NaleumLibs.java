@@ -1,24 +1,20 @@
 package com.github;
 
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.github.NLSTUDIO.Java;
-import com.github.NLSTUDIO.Hologram;
-
-public final class NaleumLibs extends JavaPlugin implements Listener {
+public final class NaleumLibs extends JavaPlugin implements Listener, NaleumLibsListener {
 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
+        this.getCommand("nlreload").setExecutor(new Commands());
+        NaleumEventListener.eventRegister(this);
+    }
+
+    @Override
+    public void onNaleumLibsReload() {
+        System.out.println("✅ NaleumLibs가 리로드되었습니다!");
     }
 
     /*test

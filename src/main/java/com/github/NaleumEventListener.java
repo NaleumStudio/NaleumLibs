@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
 
-interface NaleumLibsListener extends EventListener {
+interface NaleumLibsListener {
     void onNaleumLibsReload();
 }
 

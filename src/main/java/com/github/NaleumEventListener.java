@@ -1,7 +1,6 @@
 package com.github;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 interface NaleumLibsListener {

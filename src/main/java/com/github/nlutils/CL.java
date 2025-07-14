@@ -1,4 +1,4 @@
-package com.github.NLSTUDIO;
+package com.github.nlutils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
